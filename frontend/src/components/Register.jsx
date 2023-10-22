@@ -11,6 +11,8 @@ function Register(){
         const [lastname,setLastname] = useState("")
         const [password,setPassword] = useState("")    
 
+        const [isValid,setIsValid] = useState(true)
+
 
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,6 +20,11 @@ function Register(){
 
             axios.post('http://localhost:3000/register',data).then(response => {
                 console.log(response)
+                setIsValid(false)
+                setEmail("")
+                setFirstname("")
+                setLastname("")
+                setPassword("")
             })
             .catch(error => {
                 console.error('Error sending data:', error);
@@ -31,8 +38,9 @@ function Register(){
         <>
         <section className="form-section">
         <h1 className="homepage-heading">Talent Acquisition Hub</h1>
-            <div className="successMsg hide">
+            <div className={`successMsg ${isValid ? 'hide' : 'show'}`}>
             Registered Successfully
+            
 
             </div>
         <form onSubmit={handleSubmit}>
