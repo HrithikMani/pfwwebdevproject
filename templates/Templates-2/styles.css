@@ -90,6 +90,16 @@ button.cyan-button {
     cursor: pointer;
 }
 
+footer {
+    background-color: #222;
+    color: cyan;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .white-link {
     color: white;
 }
