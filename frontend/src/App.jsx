@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import NavBar from './components/NavBar';
 import ApiService from './api/testService';
+import Profile from './components/Profile';
 function App() {
   
 
@@ -29,6 +30,7 @@ function App() {
       
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/profile" element={<Profile />} />
       
       </Routes>
     </Router>
