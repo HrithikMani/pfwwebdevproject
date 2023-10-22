@@ -8,6 +8,16 @@
     border-radius: 5px;
     font-weight: bold;
 }
+.successMsg{
+    display: block;
+    border: 1px solid green;
+    width: 16%;
+    margin: 10px auto;
+    background: green;
+    padding: 1em;
+    border-radius: 5px;
+    font-weight: bold;
+}
 .show{
     display: block;
 }
@@ -17,3 +27,4 @@
 .white-link-dec{
     text-decoration: underline;
 }
+
