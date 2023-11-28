@@ -10,6 +10,8 @@ import Register from './components/Register';
 import NavBar from './components/NavBar';
 import ApiService from './api/testService';
 import Profile from './components/Profile';
+import JobApplicationForm from'./components/JobApplicationForm';
+import JobList from './components/JobList';
 function App() {
   
 
@@ -31,6 +33,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/job_application" element={<JobApplicationForm />} />
+      <Route path="/job_list" element={<JobList />} />
       
       </Routes>
     </Router>
