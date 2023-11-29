@@ -1,0 +1,150 @@
+.logoProfileHeader{
+    background-color: #3e3636;
+    padding: 1rem;
+    text-align: left;
+    color: white;
+}
+
+.sidebar {
+    height: 100%;
+    width: 15%;
+    position: fixed;
+    background-color: #333;
+    padding-top: 20px;
+  }
+
+  .sidebar a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+  }
+.sideIcon{
+    margin-right: 8px;
+}
+.sideBarActive{
+    background-color: #d72323;
+}
+.content{
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    width: 85%;
+    margin-left: 15%;
+}
+.jobbox{
+    background-color: #f7f7f7;
+    border: 1px solid grey;
+    padding: 5px;
+    display: flex;
+    width: 31%;
+    margin: 10px;
+    border-radius: 5px;;
+}
+.jobOuterBox{
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+.flex{
+display: flex;
+color: black;
+}
+.jobsec2{
+    width: 70%;
+}
+.jobsec1{
+    width: 30%;
+}
+.picLogo{
+    width: 100%;
+    height: 100%;
+}
+.grid{
+    display: grid;
+}
+.jobdescOuter{
+    margin-left: 10px;
+}
+.btnApply{
+    display: block;
+    width: 200px;
+}
+.applybtnouter{
+    display: block;
+}
+.jobDescriptionOuter{
+    width: 80%;
+}
+.jobApplynOuter{
+    width: 20%;
+}
+.jobDescHeader{
+    padding: 10px;
+    border-bottom: 1px solid grey;
+    color: black;
+}
+.jobDescImg{
+    width: 250px;
+    display: block;
+    margin: 20px auto;
+}
+.jcontent{
+    background-color: #f7f7f7;
+}
+.jobDescSection{
+    margin-top: 20px;
+    color: black;
+}
+.jobdescapplybtnouter button{
+    margin: 0 auto;
+    display: block;
+    width: 50%;
+}
+.jobdescapplybtnouter{
+    margin-bottom: 50px;
+}
+.jobbox{
+    padding: 20px;
+}
+.sidebar a{
+    cursor: pointer;
+}
+#MyAppplications,#MyNotifications{
+ color: black;   
+}
+.close{
+    border: none;
+}
+.jobmyapprow{
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.jobouteroverflow{
+    height: 80vh;
+    overflow-y: scroll;
+}
+.hide{
+    display: none;
+}
+.jobUpdateOuter input{
+    margin: 20px;
+}
+.jobUpdateOuter button{
+    
+    display: block;
+    margin: 20px auto;
+    width: 30%;
+}
+.jobUpdateOuter{
+    color: black;
+}
+.jobUpdateOuter h4{
+    margin: 10px;
+    cursor: pointer;
+}
+.uploadResume{
+    margin-bottom: 30px;
+}
