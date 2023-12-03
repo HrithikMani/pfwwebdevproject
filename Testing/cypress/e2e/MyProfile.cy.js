@@ -1,33 +1,25 @@
-// describe('template spec', () => {
-//   it('passes', () => {
-//     cy.visit('https://example.cypress.io')
-//   })
-// })
-// cypress/integration/profile.spec.js
- 
-describe('Profile Page', () => {
-  it('Should navigate to My Profile page', () => {
+// cypress/integration/myprofile.spec.js
+
+describe('MyProfile Page', () => {
+  it('should load My Profile page and check fields', () => {
+    // Visit the My Profile page
     cy.visit('http://localhost:5173/myprofile');
-    cy.contains('h1', 'My Profile');
+
+    // Check if the header contains 'My Profile'
+    cy.get('.jobDescHeader h1').should('contain', 'My Profile');
+
+    // Check if the input fields are present
+    cy.get('.jobUpdateOuter input[placeholder="First Name"]').should('exist');
+    cy.get('.jobUpdateOuter input[placeholder="Last Name"]').should('exist');
+    cy.get('.jobUpdateOuter input[placeholder="Email ID"]').should('exist');
+    cy.get('.jobUpdateOuter input[placeholder="Password"]').should('exist');
   });
- 
-  // it('Should navigate to Job Listings and apply for a job', () => {
-  //   cy.visit('http://localhost:5173/listjobs');
-  //   cy.get('.jobbox:first-child .btnApply').click();
-  //   cy.contains('h5', 'Role :  Software Intern');
-  //   cy.get('.btn.btn-success').click();
-  //   // Add more assertions based on your application behavior
-  // });
- 
-  // it('Should navigate to My Applications and review an application', () => {
-  //   cy.visit('http://localhost:5173/myapplications');
-  //   cy.get('.modal-body.jobouteroverflow .btn-warning:first-child').click();
-  //   // Add assertions based on your application behavior
-  // });
- 
-  it('Should navigate to My Notifications', () => {
-    cy.visit('http://localhost:5173/mynotifications');
-   
+
+  it('should go back to the previous page when clicking the Back button', () => {
+    // Click the Back button
+    cy.get('.sidebar a').contains('Back').click();
+
+    // Assuming the page navigates to the list of jobs
+    cy.url().should('include', '/listjobs');
   });
- 
 });
