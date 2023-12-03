@@ -39,6 +39,7 @@ function Login(){
                        
                     }else{
                        window.location = "/listjobs";
+                       localStorage.setItem("id",response.data.data[0].id)
                     }
              })    
         .catch(error => {

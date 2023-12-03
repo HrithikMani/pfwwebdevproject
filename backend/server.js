@@ -80,7 +80,7 @@ app.put("/login", async(req,res)=>{
   console.log(q);
   const result = await pool.query(q);
   if(result.rowCount == 1){
-    res.json({"res":1});
+    res.json({"res":result.rows[0].id});
   }else{
     res.json({"res":0});
   }
