@@ -1,15 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../css/Profile.css"
 import { Link, useParams } from 'react-router-dom'
+import axios from 'axios';
 function MyProfile() {
     const handleUpload = ()=>{
        document.getElementById("fileInput").click();
     }
   
-    const handleResumeUpload = ()=>{
+    const handleResumeUpload = async()=>{
         document.getElementById("fileResume").click();
-     }
+    }
+
+   const [firstname,setFirstname] = useState("")
+   const [lastname,setLastname] = useState("")
    
+   const [email,setEmail] = useState("")
+   const [password,setPassword] = useState("")
+
+   const [msg,setMsg] = useState("hi")
+   const [isValid,setIsValid] = useState(true)
+    useEffect(() => {
+     
+        axios.get("http://localhost:3000/login/"+localStorage.getItem("id")).then((data)=>{
+            var res = data.data[0];
+            setEmail(res.email);
+            setPassword(res.password);
+            setFirstname(res.firstname);
+            setLastname(res.lastname);
+          
+        })
+     
+      }, []);
+     
+    const handleUpdate = (e) =>{
+        e.preventDefault();
+        var data = {
+            "firstname":firstname,
+            "lastname":lastname,
+            "email":email,
+            "password":password,
+            "id":localStorage.getItem("id")
+        }
+        axios.put("http://localhost:3000/login/",data).then((data)=>{
+          
+                setMsg("Updated values");
+                setIsValid(false);
+           
+        })
+    }
     return (
     <div>
       <div className="logoProfileHeader">
@@ -33,15 +71,15 @@ function MyProfile() {
                         </div>
                     </div>
 
-
+                    <div className={`successMsg ${isValid ? 'hide' : 'show'}`}>{msg}</div>
                     <div className='row jobUpdateOuter'>
                         
                     <form class="form-group">
-                         <input required  type="text" placeholder="First Name" className='form-control'/>
-                         <input required type="text" placeholder="Last Name"  className='form-control' />
-                         <input required type="text" placeholder="Email ID"  className='form-control' />
-                          <input required type="password" placeholder="Password"  className='form-control'  />
-                         <button type="submit" className="btn btn-primary">Update</button>
+                         <input value={firstname}  onChange={(e)=> setFirstname(e.target.value)} required  type="text" placeholder="First Name" className='form-control'/>
+                         <input required type="text" placeholder="Last Name"  className='form-control' value={lastname}  onChange={(e)=> setLastname(e.target.value)} />
+                         <input required type="text" placeholder="Email ID"  className='form-control' value={email}  onChange={(e)=> setEmail(e.target.value)} />
+                          <input required type="password" placeholder="Password"  className='form-control' value={password}  onChange={(e)=> setPassword(e.target.value)} />
+                         <button onClick={handleUpdate} type="submit" className="btn btn-primary">Update</button>
                     </form>
 
                     </div>

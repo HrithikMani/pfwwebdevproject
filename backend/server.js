@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 app.use(cors())
 app.use(bodyParser.json());
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
 
 app.get('/', async (req, res) => {
     try{
@@ -54,7 +51,7 @@ app.post('/register', async (req, res) => {
 
 
   try{
-    console.log(req.body)
+    console.log("Registering new user : "+JSON.stringify(req.body))
     var q = "INSERT INTO users(username,email,role,password,firstname,lastname) VALUES('"+ req.body.firstname + req.body.lastname  +"','"+ req.body.email+"',0,'"+ req.body.password +"','"+ req.body.firstname +"','"+ req.body.lastname +"');";
     console.log(q)  
     const result = await pool.query(q);
@@ -73,4 +70,40 @@ app.post('/register', async (req, res) => {
 
 
 
+});
+
+
+app.put("/login", async(req,res)=>{
+  console.log("updating details for :"+ JSON.stringify(req.body));
+  
+  var q = "UPDATE users SET firstname='"+req.body.firstname+"',lastname='"+req.body.lastname+"',password='"+req.body.password+"',email='"+req.body.email+"' WHERE id="+req.body.id;
+  console.log(q);
+  const result = await pool.query(q);
+  if(result.rowCount == 1){
+    res.json({"res":1});
+  }else{
+    res.json({"res":0});
+  }
+    
+
+})
+
+app.get("/login/:id", async(req,res)=>{
+  console.log("Fetching user values for user id :"+ JSON.stringify(req.params.id));
+  var q = "SELECT * FROM users where id = "+ req.params.id;
+  console.log(q);
+  const result = await pool.query(q);
+  try{
+  res.json(result.rows);
+  }catch(error){
+    console.error('Error executing query:', error);
+    res.status(500).send('Internal Server Error');
+  }
+})
+
+
+
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
