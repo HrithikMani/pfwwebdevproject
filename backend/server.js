@@ -119,22 +119,30 @@ app.use('/profilepicture', express.static('profilepicture'));
 
 app.post('/uploadprofile', upload.single('file'), async(req, res) => {
   try {
-    // File details are available in req.file
-    console.log('File uploaded:', req.file.filename);
-    var q = "UPDATE users SET profilepic='"+ req.file.filename+"' where id ="+req.body.id+";";
-    const result = await pool.query(q);
-    // Send a response to the client
-    res.json({ message: req.file.filename });
+   if(req.file){
+      console.log("Fetching user values for user id :"+ JSON.stringify(req.params.id));
+      var q = "SELECT * FROM users where id = "+ req.params.id;
+      console.log(q);
+   }
+
   } catch (error) {
     console.error('Error uploading file:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
+app.get('/jobs', async (req, res) => {
+  try {
+    // Retrieve jobs from PostgreSQL database and sort by posted_date
+    const result = await pool.query('SELECT * FROM jobs ORDER BY posted_date DESC');
+    const sortedJobs = result.rows;
 
-
-
-
+    res.json(sortedJobs);
+  } catch (error) {
+    console.error('Error retrieving jobs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 app.listen(PORT, () => {
