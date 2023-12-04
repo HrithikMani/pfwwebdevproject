@@ -31,6 +31,33 @@ function Login(){
             return;
         }
         var dataB = {email:email,password:password}
+      
+            if(localStorage.getItem("type") == "1"){
+                
+
+            axios.post('http://localhost:3000/recruiter/login',dataB)
+                .then(response => {
+                        if(response.data.res === 0){
+                            setErmsg("Invalid Credentials");
+                            setIsValid(false);
+                           
+                        }else{
+                           window.location = "/recruiter";
+                           localStorage.setItem("id",response.data.data[0].id)
+                        }
+                 })    
+            .catch(error => {
+                 console.error('Error sending data:', error);
+            });
+       
+                
+
+
+
+
+                return;
+            }
+        
         axios.post('http://localhost:3000/login',dataB)
             .then(response => {
                     if(response.data.res === 0){
@@ -45,7 +72,8 @@ function Login(){
         .catch(error => {
              console.error('Error sending data:', error);
         });
-        
+   
+           
     }
 
     return (

@@ -10,6 +10,12 @@ const path = require('path');
 app.use(cors())
 app.use(bodyParser.json());
 
+app.post("/addjob",async(req,res)=>{
+  var q = "INSERT INTO jobs (job_title, job_description, skills, salary, location, posted_date) VALUES ('"+req.body.job_title+"', '"+req.body.job_description+"', '"+req.body.job_skills+"','"+req.body.salary+"','"+req.body.salary+"', CURRENT_DATE);"
+  console.log(q);
+  const result = await pool.query(q);
+  res.json(req.body);
+})
 
 app.get('/', async (req, res) => {
     try{
@@ -155,6 +161,32 @@ app.get('/job/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+
+app.post("/recruiter/login",async(req,res)=>{
+  console.log("received a login request for recruiter")
+
+  try{
+    console.log(req.body)
+    var q = "SELECT * FROM users Where email='"+req.body.email+"' AND password='"+req.body.password+"' AND role=1;"; 
+    console.log(q)  
+    const result = await pool.query(q);
+    if(result.rowCount == 0){
+      res.json({"res":0});
+    }else{
+      res.json({"res":1,"data":result.rows});
+      
+    }
+      
+  }catch(error){
+      console.error('Error executing query:', error);
+      res.status(500).send('Internal Server Error');
+  }
+  
+
+})
+
 
 
 app.listen(PORT, () => {

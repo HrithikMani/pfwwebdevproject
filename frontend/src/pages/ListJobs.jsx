@@ -42,7 +42,7 @@ function ListJobs() {
     <div class="sidebar">
             <a  onClick={handlesidebar} href="#" id="listjob" className="sideBarActive"><i class="fa-solid fa-pen-to-square sideIcon"></i>Job Listings</a>
             <a onClick={handlesidebar} data-toggle="modal" data-target="#MyAppplications"><i  class="fa-solid fa-bookmark sideIcon"></i>My Applications</a>
-            <a onClick={handlesidebar} data-toggle="modal" data-target="#MyNotifications"  href="#"><i class="fa-solid fa-bell sideIcon"></i>Notification</a>
+            {/* <a onClick={handlesidebar} data-toggle="modal" data-target="#MyNotifications"  href="#"><i class="fa-solid fa-bell sideIcon"></i>Notification</a> */}
             <Link to="/myprofile"><span href="#"><i class="fa-solid fa-user sideIcon"></i>My Profile</span></Link>
             <Link to="/login"><span href="#"><i class="fa-solid fa-circle-xmark sideIcon"></i>Logout</span></Link>
     </div>
