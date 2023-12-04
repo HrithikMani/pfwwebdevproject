@@ -16,6 +16,7 @@ function App() {
  const job = lazy(()=> import("./pages/Job"));
  const profile = lazy(()=> import("./pages/MyProfile"));
  const recruiter = lazy(()=> import("./pages/Recruiter"));
+ const myorofrec = lazy(()=> import("./pages/MyProfileRecruiter"));
   return (
     
 
@@ -34,6 +35,9 @@ function App() {
   
 
   <Route path="/recruiter" Component={recruiter} />
+  <Route path="/recruiter/profile" Component={myorofrec} />
+  
+  
   
 
 

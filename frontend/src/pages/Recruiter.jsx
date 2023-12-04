@@ -45,7 +45,7 @@ function Recruiter() {
             <a  onClick={handlesidebar} href="#" id="listjob"><i class="fa-solid fa-pen-to-square sideIcon"></i>My Jobs</a>
             {/* <a onClick={handlesidebar} data-toggle="modal" data-target="#MyAppplications"><i  class="fa-solid fa-bookmark sideIcon"></i>My Applications</a> */}
             {/* <a onClick={handlesidebar} data-toggle="modal" data-target="#MyNotifications"  href="#"><i class="fa-solid fa-bell sideIcon"></i>Notification</a> */}
-            <Link to="/myprofile"><span href="#"><i class="fa-solid fa-user sideIcon"></i>My Profile</span></Link>
+            <Link to="/recruiter/profile"><span href="#"><i class="fa-solid fa-user sideIcon"></i>My Profile</span></Link>
             <Link to="/login"><span href="#"><i class="fa-solid fa-circle-xmark sideIcon"></i>Logout</span></Link>
     </div>
 
