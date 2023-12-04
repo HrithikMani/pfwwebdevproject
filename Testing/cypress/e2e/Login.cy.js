@@ -1,6 +1,6 @@
 describe('Login Page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/login'); // Update with your actual login page URL
+    cy.visit('http://localhost:5173/login'); 
   });
 
   it('should navigate to the list jobs page after successful login', () => {
