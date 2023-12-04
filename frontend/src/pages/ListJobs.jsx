@@ -64,7 +64,7 @@ function ListJobs() {
                           <h5>Role :  <span>{item.job_title}</span></h5>
                              <h5>Location : {item.location}</h5>
                            <h5>Pay : {item.salary}</h5>
-                           <Link to="/job/1"><button className="btn btn-success btnApply">Apply</button></Link> 
+                           <Link to={`/job/${item.job_id}`}><button className="btn btn-success btnApply">Apply</button></Link> 
                        </div>
 
 

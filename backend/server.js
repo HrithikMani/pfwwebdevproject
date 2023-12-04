@@ -145,6 +145,18 @@ app.get('/jobs', async (req, res) => {
 });
 
 
+app.get('/job/:id', async (req, res) => {
+  try {
+    // Retrieve jobs from PostgreSQL database and sort by posted_date
+    const result = await pool.query('SELECT * FROM jobs WHERE job_id='+req.params.id);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error retrieving jobs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

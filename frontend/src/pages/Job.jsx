@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../css/Profile.css"
 import { Link, useParams } from 'react-router-dom'
 function Job() {
 
     const { jobid } = useParams();
-    console.log(jobid)
+    
+    const [data,setData] = useState(null);
+
+    useEffect(() => {
+        fetch("http://localhost:3000/job/"+jobid).then(response => response.json()).then(data =>{
+            setData(data[0])
+        })
+ 
+      }, []);
+ 
+
+
+
   return (
     <>
     <div className="logoProfileHeader">
@@ -17,14 +29,22 @@ function Job() {
             <Link to="/listjobs"><span href="#"><i class="fa-solid fa-circle-left sideIcon"></i>Back</span></Link>
             <Link to="/login"><span href="#"><i class="fa-solid fa-circle-xmark sideIcon"></i>Logout</span></Link>
     </div>
-    <div className="content jcontent">
+
+
+    {(data == null) ? (
+        <p>Loading...</p>
+      ) : (
+        
+
+
+        <div className="content jcontent">
         <div className='container-fluid'>
             <div className='row'>
             <div className='col-8'>
                 
                     <div className='row jobDescHeader'>
                         <div className='col'>
-                            <h1>Software Engineer</h1>
+                            <h1>{data.job_title}</h1>
                         </div>
                     </div>
 
@@ -33,9 +53,7 @@ function Job() {
                             <h3>Job Description</h3>
                             <span>
                             <p>
-                            Shamrock Trading Corporation is the parent company for a family of brands in transportation services, finance and technology. Headquartered in Overland Park, KS, Shamrock has regularly been named “Best Places to Work” by the Kansas City Business Journal. We also have offices in Atlanta, Chicago, Dallas, Ft. Lauderdale, Houston, Laredo, Midland, Nashville and Phoenix.
-
-With an average annual revenue growth of 25% over several decades, Shamrock’s success is attributed to three key factors: hiring the best people, cultivating long-term relationships with our customers and continually evolving in the marketplace.
+                            {data.job_description}
                             </p>
                         </span>
                         </div>
@@ -45,7 +63,10 @@ With an average annual revenue growth of 25% over several decades, Shamrock’s 
                     <div className='row jobDescSection'>
                         <div className='col'>
                             <h3>Skills</h3>
-                            <p>C , Java , GCP etc</p>
+                            <p>
+                            {data.skills}
+
+                            </p>
                         </div>
                        
                     </div>
@@ -59,9 +80,9 @@ With an average annual revenue growth of 25% over several decades, Shamrock’s 
                 </div>
                 <div className='row jobDescSection'>
                         <div className='col'>
-                            <h4>Location : <span>Seattle</span> </h4>
-                            <h4>Job Id : <span>9001</span> </h4>
-                            <h4>Pay : <span>$95,200/yr - $126,000/yr</span> </h4>
+                            <h4>Location : <span>{data.location}</span> </h4>
+                            <h4>Job Id : <span>{data.job_id}</span> </h4>
+                            <h4>Pay : <span>${data.salary}</span> </h4>
                        
                         </div>
                        
@@ -80,6 +101,11 @@ With an average annual revenue growth of 25% over several decades, Shamrock’s 
         </div>
 
     </div>
+
+
+      )}
+
+   
         </>
   )
 }
