@@ -4,6 +4,8 @@ const PORT = 3000;
 const cors= require("cors")
 const pool = require("./db")
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const path = require('path');
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -100,6 +102,37 @@ app.get("/login/:id", async(req,res)=>{
     res.status(500).send('Internal Server Error');
   }
 })
+
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'profilepicture/'); // Set the destination folder for uploaded files
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Set the filename (use the current timestamp to make it unique)
+  },
+});
+const upload = multer({ storage });
+
+app.use('/profilepicture', express.static('profilepicture'));
+
+app.post('/uploadprofile', upload.single('file'), async(req, res) => {
+  try {
+    // File details are available in req.file
+    console.log('File uploaded:', req.file.filename);
+    var q = "UPDATE users SET profilepic='"+ req.file.filename+"' where id ="+req.body.id+";";
+    const result = await pool.query(q);
+    // Send a response to the client
+    res.json({ message: req.file.filename });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
 
 
 
