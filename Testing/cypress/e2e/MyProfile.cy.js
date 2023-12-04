@@ -1,25 +1,30 @@
-// cypress/integration/myprofile.spec.js
-
-describe('MyProfile Page', () => {
-  it('should load My Profile page and check fields', () => {
-    // Visit the My Profile page
-    cy.visit('http://localhost:5173/myprofile');
-
-    // Check if the header contains 'My Profile'
-    cy.get('.jobDescHeader h1').should('contain', 'My Profile');
-
-    // Check if the input fields are present
-    cy.get('.jobUpdateOuter input[placeholder="First Name"]').should('exist');
-    cy.get('.jobUpdateOuter input[placeholder="Last Name"]').should('exist');
-    cy.get('.jobUpdateOuter input[placeholder="Email ID"]').should('exist');
-    cy.get('.jobUpdateOuter input[placeholder="Password"]').should('exist');
+describe('ListJobs Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:5173/listjobs');
+    cy.wait(2000);
   });
-
-  it('should go back to the previous page when clicking the Back button', () => {
-    // Click the Back button
-    cy.get('.sidebar a').contains('Back').click();
-
-    // Assuming the page navigates to the list of jobs
-    cy.url().should('include', '/listjobs');
+ 
+  it('should display the job listings', () => {
+    cy.get('.jobbox').should('have.length.greaterThan', 0);
+  });
+ 
+  it('should navigate to My Applications modal when clicked', () => {
+    cy.get('[data-target="#MyAppplications"]').click();
+    cy.get('.modal-title').should('contain.text', 'My Applications');
+  });
+ 
+  it('should navigate to My Notifications modal when clicked', () => {
+    cy.get('[data-target="#MyNotifications"]').click();
+    cy.get('.modal-title').should('contain.text', 'My Notifications');
+  });
+ 
+  it('should navigate to My Profile page when clicked', () => {
+    cy.get('[href="/myprofile"]').click();
+    cy.url().should('include', '/myprofile');
+  });
+ 
+  it('should navigate to Login page when Logout is clicked', () => {
+    cy.get('[href="/login"]').click();
+    cy.url().should('include', '/login');
   });
 });
