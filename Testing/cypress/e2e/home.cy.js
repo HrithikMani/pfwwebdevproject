@@ -1,5 +1,3 @@
-
-
 describe('Home test', () => {
   it('should display the Talent Acquisition Hub homepage', () => {
     
